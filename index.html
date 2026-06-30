@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Think Global — The Deal, Visualized (Internal)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#0A0A0A;--paper-2:#141414;--paper-3:#1A1A1A;--paper-4:#222;
+    --ink:#F5F5F4;--ink-2:#D1D5DB;--ink-3:#9CA3AF;--ink-4:#6B7280;
+    --rule:#2A2A2A;--rule-2:#3A3A3A;--signal:#8CC63F;--warn:#E0B341;--danger:#E07A41;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;background-image:repeating-linear-gradient(0deg,rgba(140,198,63,.012) 0 1px,transparent 1px 3px);}
+  p,li{color:var(--ink-2);}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
+  .mono{font-family:'Space Mono',monospace;}.serif{font-family:'Instrument Serif',serif;}.signal{color:var(--signal);}
+  .chrome{display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);padding:14px 0;border-bottom:1px solid var(--rule);}
+  .chrome .wm{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink-2);}
+  .chrome .wm .s{color:var(--signal);}
+  .hero{padding:40px 0 30px;border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:16px;}
+  h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(2.6rem,5.5vw,4.2rem);line-height:1.02;letter-spacing:-.015em;}
+  h1 em{font-style:italic;color:var(--signal);}
+  .lede{font-size:16px;color:var(--ink-3);max-width:64ch;margin-top:14px;}
+  section{padding:40px 0;border-bottom:1px solid var(--rule);position:relative;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;}
+  .sec-idx{font-family:'Space Mono',monospace;font-size:12px;color:var(--signal);letter-spacing:.1em;}
+  .sec-title{font-family:'Instrument Serif',serif;font-size:30px;line-height:1;}
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule-2);}
+  .stat{padding:22px 20px;border-right:1px solid var(--rule);}
+  .stat:last-child{border-right:none;}
+  .stat .fig{font-family:'Instrument Serif',serif;font-size:2.6rem;line-height:1;color:var(--signal);}
+  .stat .lbl{font-size:.82rem;color:var(--ink-3);margin-top:8px;}
+  /* cards */
+  .cards{display:grid;gap:14px;}
+  .c3{grid-template-columns:repeat(3,1fr);}.c2{grid-template-columns:1fr 1fr;}
+  .card{border:1px solid var(--rule-2);border-top:3px solid var(--signal);background:var(--paper-2);padding:20px;}
+  .card.warn{border-top-color:var(--warn);}
+  .card .k{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:10px;}
+  .card.warn .k{color:var(--warn);}
+  .card h4{font-family:'Instrument Serif',serif;font-weight:400;font-size:21px;margin-bottom:6px;}
+  .card .big{font-family:'Instrument Serif',serif;font-size:2.2rem;color:var(--signal);line-height:1;}
+  .card p,.card li{font-size:13px;color:var(--ink-3);}
+  .card ul{list-style:none;padding:0;margin-top:8px;}
+  .card li{padding:4px 0 4px 16px;position:relative;}
+  .card li:before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;background:var(--signal);}
+  /* ownership split */
+  .split{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;border:1px solid var(--rule-2);}
+  .own{padding:22px;}
+  .own.you{background:var(--paper-2);}
+  .own .role{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal);margin-bottom:12px;}
+  .own h4{font-family:'Instrument Serif',serif;font-weight:400;font-size:22px;margin-bottom:10px;}
+  .own ul{list-style:none;padding:0;}
+  .own li{font-size:13.5px;color:var(--ink-2);padding:6px 0 6px 18px;position:relative;border-bottom:1px solid var(--rule);}
+  .own li:before{content:"";position:absolute;left:0;top:13px;width:6px;height:6px;background:var(--signal);}
+  .own.them li:before{background:var(--ink-4);}
+  .vs{display:flex;align-items:center;justify-content:center;padding:0 18px;font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-4);border-left:1px solid var(--rule);border-right:1px solid var(--rule);}
+  .callout{border:1px solid var(--rule-2);border-left:3px solid var(--warn);background:var(--paper-2);padding:16px 20px;margin-top:16px;font-size:14px;color:var(--ink-2);}
+  .callout b{color:var(--ink);}
+  .callout .lead{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink);display:block;margin-bottom:6px;}
+  /* waterfall (per student) */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;border:1px solid var(--rule-2);margin-top:6px;}
+  .flow .step{flex:1;min-width:150px;padding:18px;border-right:1px solid var(--rule);}
+  .flow .step:last-child{border-right:none;background:var(--paper-2);}
+  .flow .step .t{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px;}
+  .flow .step .v{font-family:'Instrument Serif',serif;font-size:1.7rem;color:var(--ink);}
+  .flow .step.net .v{color:var(--signal);}
+  .flow .step .s{font-size:11.5px;color:var(--ink-4);margin-top:4px;}
+  /* bar chart */
+  .bars{margin-top:8px;}
+  .bar{display:flex;align-items:center;gap:14px;padding:9px 0;}
+  .bar .yr{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-3);width:50px;}
+  .bar .track{flex:1;background:var(--paper-3);height:30px;position:relative;border:1px solid var(--rule);}
+  .bar .fill{height:100%;background:linear-gradient(90deg,#5f7f2a,var(--signal));display:flex;align-items:center;justify-content:flex-end;padding-right:10px;}
+  .bar .fill span{font-family:'Space Mono',monospace;font-size:11px;color:#0A0A0A;font-weight:700;}
+  .bar .note{font-size:11px;color:var(--ink-4);width:120px;}
+  .big-num{font-family:'Instrument Serif',serif;font-size:clamp(3rem,8vw,5.5rem);color:var(--signal);line-height:1;}
+  .big-cap{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin-top:8px;}
+  ul.clean{list-style:none;padding:0;max-width:80ch;}
+  ul.clean li{position:relative;padding:9px 0 9px 24px;border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--ink-2);}
+  ul.clean li:before{content:"";position:absolute;left:0;top:17px;width:7px;height:7px;background:var(--signal);}
+  ul.clean li b{color:var(--ink);}
+  ol.steps{list-style:none;padding:0;counter-reset:s;max-width:80ch;}
+  ol.steps li{counter-increment:s;position:relative;padding:11px 0 11px 42px;border-bottom:1px solid var(--rule);font-size:14.5px;}
+  ol.steps li:before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:11px;font-family:'Space Mono',monospace;font-size:12px;color:var(--signal);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  footer{padding:26px 0 60px;}
+  .foot{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);}
+  @media(max-width:820px){.stats,.c3,.c2,.grid2{grid-template-columns:1fr;}.split{grid-template-columns:1fr;}.vs{display:none;}.own.them{border-top:1px solid var(--rule);}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="chrome"><div class="wm">Third Team <span class="s">/</span> Ventures</div><div>Think Global · Internal · Confidential</div></div>
+
+  <div class="hero">
+    <div class="eyebrow">● The deal, visualized — for Fleire</div>
+    <h1>Think Global,<br>by the <em>numbers</em></h1>
+    <p class="lede">What to pitch the school on Friday, how the partnership is structured, and what it earns you — at a glance. Internal only; do not share.</p>
+  </div>
+
+  <!-- AT A GLANCE -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">01 /</span><span class="sec-title">At a glance</span></div>
+    <div class="stats">
+      <div class="stat"><div class="fig">2,400</div><div class="lbl">students / year (their target)</div></div>
+      <div class="stat"><div class="fig">₱4.3M</div><div class="lbl">gross to your side / yr at scale</div></div>
+      <div class="stat"><div class="fig">~₱2.6M</div><div class="lbl">net recurring / yr (after trainers)</div></div>
+      <div class="stat"><div class="fig">Fri</div><div class="lbl">school pitch — title + price due</div></div>
+    </div>
+  </section>
+
+  <!-- FRIDAY PITCH -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">02 /</span><span class="sec-title">Friday: what they pitch the school</span></div>
+    <p style="margin-bottom:18px;max-width:64ch;"><b style="color:var(--ink)">AI Ready</b> — a 3-day AI literacy program, ~70% hands-on, by level, with a certificate. They sell the outcome and the price. The method stays yours.</p>
+    <div class="cards c3">
+      <div class="card"><div class="k">Elementary · Awareness</div><div class="big">₱1,800</div><p style="margin-top:6px;">school price / student</p></div>
+      <div class="card"><div class="k">Jr / Sr High · Literacy</div><div class="big">₱2,800</div><p style="margin-top:6px;">school price / student</p></div>
+      <div class="card"><div class="k">College · Automation</div><div class="big">₱3,500</div><p style="margin-top:6px;">school price / student</p></div>
+    </div>
+    <div class="callout" style="border-left-color:var(--signal);"><b>Why it sells:</b> credible (designed by you — US State Dept Fellow, Top 40 Under 40), certified, and ready to run at scale. Think Global sets the final school price and marks up on top of your wholesale.</div>
+  </section>
+
+  <!-- PARTNERSHIP -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">03 /</span><span class="sec-title">How we'd partner</span></div>
+    <div class="split">
+      <div class="own you">
+        <div class="role">● You — Third Team Ventures</div>
+        <h4>Own &amp; power the program</h4>
+        <ul>
+          <li>Own the curriculum IP + certification</li>
+          <li>Design &amp; localize by level</li>
+          <li>Certify &amp; supply the trainers</li>
+          <li>Set quality; co-brand the certificates</li>
+        </ul>
+      </div>
+      <div class="vs">×</div>
+      <div class="own them">
+        <div class="role" style="color:var(--ink-3)">○ Think Global</div>
+        <h4>Own the market</h4>
+        <ul>
+          <li>Schools, relationships, pipeline</li>
+          <li>GTM, marketing &amp; mobilization</li>
+          <li>Logistics, venue, travel, expenses</li>
+          <li>Sets the school price</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><span class="lead">"Co-own the program" — reframed.</span> You co-own the <b>venture &amp; the go-to-market brand</b> you build together. The <b>curriculum, methodology &amp; certification stay yours</b>, licensed in. Same as how their Singapore partner works: the market partner sells; the IP partner powers. This is your red line — hold it.</div>
+  </section>
+
+  <!-- ECONOMICS -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">04 /</span><span class="sec-title">Deal economics</span></div>
+
+    <p class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:10px;">Your wholesale per student (incl. certified trainer + materials + certificate)</p>
+    <div class="cards c3" style="margin-bottom:26px;">
+      <div class="card"><div class="k">Elementary</div><div class="big">₱1,200</div></div>
+      <div class="card"><div class="k">Jr / Sr High</div><div class="big">₱1,800</div></div>
+      <div class="card"><div class="k">College</div><div class="big">₱2,200</div></div>
+    </div>
+
+    <p class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;">Where each student's peso goes (blended ~₱1,800)</p>
+    <div class="flow">
+      <div class="step"><div class="t">School pays</div><div class="v">₱2,800</div><div class="s">set by Think Global</div></div>
+      <div class="step"><div class="t">→ Think Global</div><div class="v">₱1,000</div><div class="s">GTM, logistics, margin</div></div>
+      <div class="step"><div class="t">→ You (wholesale)</div><div class="v">₱1,800</div><div class="s">your license</div></div>
+      <div class="step"><div class="t">− Certified trainer</div><div class="v">₱700</div><div class="s">delivery cost</div></div>
+      <div class="step net"><div class="t">= Your net</div><div class="v">₱1,100</div><div class="s">per student</div></div>
+    </div>
+
+    <div class="grid2" style="margin-top:30px;align-items:center;">
+      <div>
+        <p class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:10px;">Your net, 3-year ramp</p>
+        <div class="bars">
+          <div class="bar"><div class="yr">Yr 1</div><div class="track"><div class="fill" style="width:52%"><span>₱1.75M</span></div></div><div class="note">setup + ramp (~1,200)</div></div>
+          <div class="bar"><div class="yr">Yr 2</div><div class="track"><div class="fill" style="width:78%"><span>₱2.6M</span></div></div><div class="note">full 2,400</div></div>
+          <div class="bar"><div class="yr">Yr 3</div><div class="track"><div class="fill" style="width:100%"><span>₱3.2M</span></div></div><div class="note">growth (~3,000)</div></div>
+        </div>
+      </div>
+      <div style="text-align:center;border:1px solid var(--rule-2);background:var(--paper-2);padding:30px 20px;">
+        <div class="big-num">₱7.5M</div>
+        <div class="big-cap">3-year net to you · recurring</div>
+        <div style="font-size:12.5px;color:var(--ink-4);margin-top:14px;">+ ₱450k one-time setup · ~95% of years 2–3 needs little of your time (certified trainers deliver)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATEGY -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">05 /</span><span class="sec-title">The strategy</span></div>
+    <div class="grid2">
+      <div>
+        <p class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:8px;">The 5 moves</p>
+        <ul class="clean">
+          <li><b>Keep the IP.</b> License it; never co-own the curriculum.</li>
+          <li><b>Price per student</b>, like their SG partner — not your enterprise rate.</li>
+          <li><b>Scale via certified trainers</b> — you're not on stage 8×/month.</li>
+          <li><b>Gate the method</b> — outcomes + price now, curriculum after the NDA (✓ sent).</li>
+          <li><b>Recurring is the prize</b> — the per-student annuity, not a one-off fee.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--danger);margin-bottom:8px;">Walk if…</p>
+        <ul class="clean">
+          <li>They want to <b>own or edit</b> the curriculum</li>
+          <li>The <b>per-student/royalty is stripped</b> out</li>
+          <li><b>Anyone can deliver</b> (no certification)</li>
+          <li>You're expected to <b>fund the build</b> or deliver free</li>
+        </ul>
+        <div class="callout" style="border-left-color:var(--signal);margin-top:16px;"><b>BATNA:</b> you own the IP + the certification standard. If this stalls, you license it to another PH education partner. Negotiate from ownership, not need.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECISION -->
+  <section style="border-bottom:none;">
+    <div class="sec-head"><span class="sec-idx">06 /</span><span class="sec-title">What "yes" looks like</span></div>
+    <ol class="steps">
+      <li>School says yes Friday off the <b>School Program Sheet</b> (title + price).</li>
+      <li>Think Global signs the <b>mutual NDA</b> (sent) + agrees the partnership structure.</li>
+      <li>One-time <b>setup (₱450k)</b> → localize curriculum + certify first trainers.</li>
+      <li><b>Pilot batch</b> → then scale across schools on the per-student annuity.</li>
+    </ol>
+    <p style="margin-top:16px;font-size:13px;color:var(--ink-4)" class="mono">Verdict: partnership is a YES — if the IP stays yours. Numbers are illustrative at ~₱1,800 blended; net assumes ~₱700/student certified-trainer cost.</p>
+  </section>
+
+  <footer><div class="foot"><div><span class="signal">●</span> Third Team Ventures · Think Global — Internal</div><div>Confidential — for Fleire only</div></div></footer>
+</div>
+</body>
+</html>
