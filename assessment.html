@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>AI Ready Certified — Assessment Framework · Internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0A0A0A;--paper-2:#141414;--paper-3:#1A1A1A;--ink:#F5F5F4;--ink-2:#D1D5DB;--ink-3:#9CA3AF;--ink-4:#6B7280;--rule:#2A2A2A;--rule-2:#3A3A3A;--signal:#8CC63F;--warn:#E0B341;--red:#E0654A;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink-2);font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.6;background-image:repeating-linear-gradient(0deg,rgba(140,198,63,.012) 0 1px,transparent 1px 3px);}
+  .wrap{max-width:980px;margin:0 auto;padding:0 28px;}
+  .mono{font-family:'Space Mono',monospace;}
+  .chrome{display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);padding:14px 0;border-bottom:1px solid var(--rule);}
+  .chrome .wm{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink-2);}.chrome .wm .s{color:var(--signal);}
+  .chrome a{color:var(--ink-4);text-decoration:none;}
+  .hero{padding:36px 0 26px;border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:12px;}
+  h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(2.4rem,5vw,3.4rem);line-height:1.04;color:var(--ink);}
+  h1 em{font-style:italic;color:var(--signal);}
+  .lede{font-size:15px;color:var(--ink-3);max-width:70ch;margin-top:12px;}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule-2);margin-top:22px;}
+  .stat{padding:18px 20px;border-right:1px solid var(--rule);}.stat:last-child{border-right:none;}
+  .stat .fig{font-family:'Instrument Serif',serif;font-size:1.7rem;line-height:1.05;color:var(--signal);}
+  .stat .lbl{font-size:.82rem;color:var(--ink-3);margin-top:6px;}
+  section{padding:34px 0;border-bottom:1px solid var(--rule);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;}
+  .sec-idx{font-family:'Space Mono',monospace;font-size:12px;color:var(--signal);}
+  .sec-title{font-family:'Instrument Serif',serif;font-size:26px;}
+  table.e{width:100%;border-collapse:collapse;}
+  table.e th{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-4);text-align:left;padding:11px 12px;border-bottom:1px solid var(--rule-2);vertical-align:bottom;}
+  table.e td{padding:12px;border-bottom:1px solid var(--rule);font-size:13.5px;text-align:left;color:var(--ink-2);vertical-align:top;}
+  table.e td:first-child{color:var(--ink);font-weight:600;}
+  table.e td.c,table.e th.c{text-align:center;}
+  .pill{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--rule-2);border-radius:2px;white-space:nowrap;color:var(--signal);border-color:rgba(140,198,63,.45);}
+  .note{border-left:2px solid var(--signal);padding:8px 0 8px 16px;margin-top:16px;font-size:13px;color:var(--ink-3);}
+  .note.amber{border-left-color:var(--warn);}.note b{color:var(--ink);}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
+  .card{border:1px solid var(--rule-2);border-radius:4px;padding:18px;background:var(--paper-2);}
+  .card h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:20px;color:var(--ink);margin-bottom:6px;}
+  .card p{font-size:13px;color:var(--ink-3);}
+  .wt{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+  .wt div{flex:1 1 180px;border:1px solid var(--rule-2);border-radius:4px;padding:14px;background:var(--paper-2);}
+  .wt .pct{font-family:'Instrument Serif',serif;font-size:1.8rem;color:var(--signal);line-height:1;}
+  .wt .nm{font-size:13px;color:var(--ink);margin-top:4px;font-weight:600;}
+  .wt .ds{font-size:12px;color:var(--ink-4);margin-top:2px;}
+  code{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--warn);background:var(--paper-3);padding:1px 6px;border-radius:3px;}
+  footer{padding:24px 0 56px;}.foot{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);}
+  @media(max-width:760px){.stats,.grid3{grid-template-columns:1fr;}.stat{border-right:none;border-bottom:1px solid var(--rule);}table.e td,table.e th{font-size:12px;padding:8px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="chrome"><div class="wm">Third Team <span class="s">/</span> Ventures</div><div><a href="./">← deal dashboard</a> · assessment framework · internal</div></div>
+
+  <div class="hero">
+    <div class="eyebrow">● AI Ready Certified · how the credential is earned</div>
+    <h1>A credential that's <em>earned</em>, not handed out</h1>
+    <p class="lede">This is what makes "AI Ready Certified" real and defensible next to Singapore's assessed certs (AI4S / AI4I). Every learner is assessed, every certificate is verifiable, and the credential stacks across the pathway. Only TTV-certified trainers may assess.</p>
+    <div class="stats">
+      <div class="stat"><div class="fig">Assessed</div><div class="lbl">project + knowledge check + presentation — not attendance</div></div>
+      <div class="stat"><div class="fig">Verifiable</div><div class="lbl">unique cert ID + public verify page</div></div>
+      <div class="stat"><div class="fig">Stackable</div><div class="lbl">one credential per pathway level, building over time</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">01 /</span><span class="sec-title">What's assessed at each level</span></div>
+    <table class="e">
+      <thead><tr><th>Level</th><th>Learning outcomes assessed</th><th>How it's assessed</th><th>To pass</th></tr></thead>
+      <tbody>
+        <tr><td>Elementary<br><span class="mono" style="color:var(--ink-4);font-size:11px;">AI Awareness</span></td><td>Can explain what AI is &amp; isn't; spots AI in daily life; safe &amp; responsible use</td><td>Guided mini-project + simple visual/oral knowledge check</td><td>Completes project + presents it</td></tr>
+        <tr><td>Junior / Senior High<br><span class="mono" style="color:var(--ink-4);font-size:11px;">AI Literacy</span></td><td>AI literacy; responsible use (privacy, bias, fact-checking); builds with AI</td><td>AI-assisted project (rubric) + short knowledge quiz</td><td>Rubric ≥ Proficient + quiz ≥ 70%</td></tr>
+        <tr><td>College<br><span class="mono" style="color:var(--ink-4);font-size:11px;">AI + Automation</span></td><td>Applied automation; no-code + light Python; responsible deployment</td><td>Working automation/output (rubric) + presentation</td><td>Working output + rubric ≥ Proficient</td></tr>
+        <tr><td>Advanced<br><span class="mono" style="color:var(--ink-4);font-size:11px;">optional</span></td><td>Deeper build; end-to-end AI-assisted solution</td><td>Capstone project + assessment + defense</td><td>Capstone ≥ Proficient on all criteria</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>One standard, scaled by level.</b> Same three things are always assessed — understanding, responsible use, and a real build — just deeper as the learner climbs. That's what lets the credential <i>stack</i>.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">02 /</span><span class="sec-title">The three assessment instruments</span></div>
+    <div class="wt">
+      <div><div class="pct">60%</div><div class="nm">The Build</div><div class="ds">A real, AI-assisted project/output the learner makes. The core of every level.</div></div>
+      <div><div class="pct">20%</div><div class="nm">Knowledge check</div><div class="ds">Short quiz/oral on AI concepts + responsible use. Scaled to age.</div></div>
+      <div><div class="pct">20%</div><div class="nm">Presentation</div><div class="ds">Learner presents and explains their work — the confidence outcome.</div></div>
+    </div>
+    <div class="note amber"><b>Weights flex by level.</b> Elementary leans almost entirely on Build + Present (knowledge check is light/visual). Senior High &amp; College carry the full 60/20/20. Advanced adds a defense to the presentation.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">03 /</span><span class="sec-title">The build rubric (every level)</span></div>
+    <table class="e">
+      <thead><tr><th>Criterion</th><th class="c">Emerging</th><th class="c">Proficient (pass)</th><th class="c">Advanced</th></tr></thead>
+      <tbody>
+        <tr><td>Understanding of AI</td><td>Names tools, unclear on how/why</td><td>Explains what the AI did and its limits</td><td>Chooses the right AI for the task &amp; justifies it</td></tr>
+        <tr><td>Responsible use</td><td>Aware of risks when prompted</td><td>Checks facts, cites AI use, respects privacy</td><td>Anticipates bias/misuse &amp; designs around it</td></tr>
+        <tr><td>The build</td><td>Incomplete or copy-paste</td><td>Working output they genuinely made</td><td>Polished, original, solves a real problem</td></tr>
+        <tr><td>Presentation</td><td>Reads notes, unclear</td><td>Explains their work with confidence</td><td>Teaches it — answers questions well</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Pass = Proficient or better on all four.</b> Trainers score against this rubric; it ships in the educator pack so scoring is consistent at any scale.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">04 /</span><span class="sec-title">The verifiable micro-credential</span></div>
+    <table class="e">
+      <tbody>
+        <tr><td>Certificate ID</td><td>Unique per learner per level — <code>AIR-{LVL}-{YYYY}-{seq}</code> (e.g. <code>AIR-LIT-2026-04821</code>)</td></tr>
+        <tr><td>On the certificate</td><td>Learner name · level · "AI Ready Certified" · "Designed by Fleire Castro" · issue date · certifying trainer · verify URL/QR</td></tr>
+        <tr><td>Public verification</td><td>A <code>/verify?id=</code> lookup confirms a credential is real (issued, level, date) — what makes it trustable to schools &amp; employers</td></tr>
+        <tr><td>Registry</td><td>TTV holds the master registry of issued credentials + certified trainers (the asset that compounds the standard)</td></tr>
+        <tr><td>Validity / re-cert</td><td>Learner credential = lifetime by level; trainers re-certify yearly (₱10k) to teach the current-year curriculum</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>This is the moat.</b> A certificate of attendance can be printed by anyone. A verifiable, assessed, registry-backed credential designed by an award-winning founder is the thing schools pay a premium for — and it's owned by TTV.</div>
+  </section>
+
+  <section style="border-bottom:none;">
+    <div class="sec-head"><span class="sec-idx">05 /</span><span class="sec-title">Integrity &amp; quality control</span></div>
+    <div class="grid3">
+      <div class="card"><h3>Certified assessors only</h3><p>Only TTV-certified trainers may assess and issue credentials — the same gate that protects the IP protects the standard.</p></div>
+      <div class="card"><h3>Moderation sampling</h3><p>A sample of each cohort's scored projects is reviewed by TTV against the rubric, to keep scoring consistent across schools and trainers.</p></div>
+      <div class="card"><h3>Annual refresh</h3><p>Assessment items + project briefs refresh each year with the curriculum (funded by the ₱300k license) so the credential never goes stale.</p></div>
+    </div>
+    <div class="note amber"><b>Build status:</b> framework is defined and ready. To make it fully live: finalize per-level quiz banks &amp; project briefs (goes in the educator pack), and stand up the <code>/verify</code> page + registry. Both are buildable before first cohort.</div>
+  </section>
+
+  <footer><div class="foot"><div><span style="color:var(--signal)">●</span> AI Ready Certified — Assessment Framework · Internal</div><div>Confidential · TTV IP · for Fleire</div></div></footer>
+</div>
+</body>
+</html>
