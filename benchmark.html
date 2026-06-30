@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>AI Ready vs Singapore — Benchmark · Internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0A0A0A;--paper-2:#141414;--paper-3:#1A1A1A;--ink:#F5F5F4;--ink-2:#D1D5DB;--ink-3:#9CA3AF;--ink-4:#6B7280;--rule:#2A2A2A;--rule-2:#3A3A3A;--signal:#8CC63F;--warn:#E0B341;--red:#E0654A;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink-2);font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.6;background-image:repeating-linear-gradient(0deg,rgba(140,198,63,.012) 0 1px,transparent 1px 3px);}
+  .wrap{max-width:980px;margin:0 auto;padding:0 28px;}
+  .mono{font-family:'Space Mono',monospace;}
+  .chrome{display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);padding:14px 0;border-bottom:1px solid var(--rule);}
+  .chrome .wm{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink-2);}.chrome .wm .s{color:var(--signal);}
+  .chrome a{color:var(--ink-4);text-decoration:none;}
+  .hero{padding:36px 0 26px;border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:12px;}
+  h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.02;color:var(--ink);}
+  h1 em{font-style:italic;color:var(--signal);}
+  .lede{font-size:15px;color:var(--ink-3);max-width:70ch;margin-top:12px;}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule-2);margin-top:22px;}
+  .stat{padding:20px;border-right:1px solid var(--rule);}.stat:last-child{border-right:none;}
+  .stat .fig{font-family:'Instrument Serif',serif;font-size:2.2rem;line-height:1.05;color:var(--signal);}
+  .stat .lbl{font-size:.82rem;color:var(--ink-3);margin-top:8px;}
+  section{padding:34px 0;border-bottom:1px solid var(--rule);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;}
+  .sec-idx{font-family:'Space Mono',monospace;font-size:12px;color:var(--signal);}
+  .sec-title{font-family:'Instrument Serif',serif;font-size:26px;}
+  table.e{width:100%;border-collapse:collapse;}
+  table.e th{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-4);text-align:left;padding:11px 12px;border-bottom:1px solid var(--rule-2);vertical-align:bottom;}
+  table.e td{padding:12px;border-bottom:1px solid var(--rule);font-size:13.5px;text-align:left;color:var(--ink-2);vertical-align:top;}
+  table.e td:first-child{color:var(--ink);font-weight:600;}
+  .pill{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--rule-2);border-radius:2px;white-space:nowrap;}
+  .pill.ok{color:var(--signal);border-color:rgba(140,198,63,.45);}
+  .pill.part{color:var(--warn);border-color:rgba(224,179,65,.45);}
+  .pill.gap{color:var(--red);border-color:rgba(224,101,74,.45);}
+  .note{border-left:2px solid var(--signal);padding:8px 0 8px 16px;margin-top:16px;font-size:13px;color:var(--ink-3);}
+  .note.amber{border-left-color:var(--warn);}
+  .note.red{border-left-color:var(--red);}
+  .note b{color:var(--ink);}
+  ol.gaps{list-style:none;counter-reset:g;padding:0;}
+  ol.gaps li{counter-increment:g;position:relative;padding:14px 0 14px 44px;border-bottom:1px solid var(--rule);font-size:14px;}
+  ol.gaps li:before{content:counter(g);position:absolute;left:0;top:12px;font-family:'Instrument Serif',serif;font-size:1.6rem;color:var(--signal);}
+  ol.gaps li b{color:var(--ink);}
+  ol.gaps li .fix{display:block;color:var(--ink-3);font-size:13px;margin-top:4px;}
+  ol.gaps li .fix span{color:var(--signal);font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;}
+  .pos{background:var(--paper-2);border:1px solid var(--rule-2);padding:18px 20px;margin-top:6px;font-size:14.5px;color:var(--ink);line-height:1.55;}
+  .pos .q{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.25rem;color:var(--signal);}
+  footer{padding:24px 0 56px;}.foot{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);}
+  .src{font-size:12px;color:var(--ink-4);margin-top:10px;}.src a{color:var(--ink-3);}
+  @media(max-width:760px){.stats{grid-template-columns:1fr;}.stat{border-right:none;border-bottom:1px solid var(--rule);}table.e td,table.e th{font-size:12px;padding:8px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="chrome"><div class="wm">Third Team <span class="s">/</span> Ventures</div><div><a href="./">← deal dashboard</a> · AI Ready vs Singapore · internal</div></div>
+
+  <div class="hero">
+    <div class="eyebrow">● Benchmark · is this SG-grade?</div>
+    <h1>AI Ready vs. <em>Singapore</em></h1>
+    <p class="lede">Singapore teaches AI to its people as a ladder — kids → students → everyone → industry — run by AI Singapore (with NUS &amp; the Ministry of Education). Here's how AI Ready lines up against it, where it matches, and the gaps to close before Think Global shares their Singapore partner's syllabus.</p>
+    <div class="stats">
+      <div class="stat"><div class="fig">Same ladder</div><div class="lbl">AI Ready mirrors SG's tiered, literacy-first, project-based design</div></div>
+      <div class="stat"><div class="fig">1 real gap</div><div class="lbl">depth at the college tier vs SG's 140-hour AI4I</div></div>
+      <div class="stat"><div class="fig">Already in PH</div><div class="lbl">AI Singapore runs AI4K train-the-trainer in the Philippines</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">01 /</span><span class="sec-title">What Singapore actually gives its people</span></div>
+    <table class="e">
+      <thead><tr><th>Programme</th><th>Audience</th><th>Depth &amp; format</th><th>Coding?</th><th>Certificate</th></tr></thead>
+      <tbody>
+        <tr><td>AI4K — AI for Kids</td><td>Primary (P3–P6)</td><td>Educator-led classroom sessions; AI basics &amp; everyday apps; awareness-first</td><td>No</td><td>Participation</td></tr>
+        <tr><td>AI4S — AI for Students</td><td>Secondary → JC / ITE / poly / uni</td><td>MOE-supported; 3 self-paced levels; practicums, no install</td><td>Intro → yes (L2)</td><td>Literacy in AI → Foundations in AI</td></tr>
+        <tr><td>AI4E — AI for Everyone</td><td>Any adult</td><td>Free 90-min non-technical foundation; now includes Generative AI</td><td>No</td><td>Completion</td></tr>
+        <tr><td>AI4I — AI for Industry</td><td>Workers / professionals</td><td>5-hr literacy + ~140 hrs Foundations; 1,500+ exercises; up to 12 months</td><td>Yes — Python, ML, deep learning</td><td>Industry-recognized, assessed</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>The design DNA:</b> tiered ladder · literacy first, coding later · self-paced + practicums · stackable, assessed, recognized certs · free/subsidized &amp; government-backed · train-the-trainer to scale (already exported to PH, Malaysia, Thailand).</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">02 /</span><span class="sec-title">Side-by-side — AI Ready ↔ Singapore</span></div>
+    <table class="e">
+      <thead><tr><th>AI Ready tier</th><th>Closest SG equivalent</th><th>Verdict</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Elementary — AI Awareness (₱1,800)</td><td>AI4K</td><td><span class="pill ok">Strong match</span></td><td>Both awareness-first, no real coding, age-appropriate. You're at parity.</td></tr>
+        <tr><td>JHS / SHS — AI Literacy (₱2,800)</td><td>AI4S (L1 Literacy → L2 Foundations)</td><td><span class="pill part">Close</span></td><td>SG's L2 adds real ML/Python foundations. Your "Literacy" should include a hands-on ML/no-code build to match L2.</td></tr>
+        <tr><td>College — AI + Automation (₱3,500)</td><td>AI4I (+ AI4S L3)</td><td><span class="pill gap">Depth gap</span></td><td>AI4I is ~140 hrs &amp; 1,500 Python exercises. A 3-day tier can't equal that — reposition as <i>applied automation</i>, or add a deeper/self-paced track.</td></tr>
+        <tr><td>Certified facilitator network</td><td>AI4K/AI4S Train-the-Trainer</td><td><span class="pill ok">Direct match</span></td><td>Your trainer-certification model is exactly how SG scales. Genuine strength — lean into it.</td></tr>
+        <tr><td>(not yet offered)</td><td>AI4E — adult / teacher literacy</td><td><span class="pill part">Opportunity</span></td><td>A short AI4E-style module for teachers/parents would round out the ladder.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Bottom line:</b> the <b>shape is Singapore-grade</b> — same ladder, same literacy-first, project + credential logic. The difference is <b>depth and time</b>: SG's serious tiers run tens-to-hundreds of self-paced hours; AI Ready is intensive, in-person, 3-day. They're complementary, not identical — so claim AI4K/AI4S parity honestly, and don't claim AI4I-equivalence at college.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">03 /</span><span class="sec-title">Gaps to close before they share their syllabus</span></div>
+    <ol class="gaps">
+      <li><b>Depth at the college tier.</b> A 3-day "AI + Automation" won't stand next to AI4I's 140 hours of Python/ML.
+        <span class="fix"><span>Fix →</span> reposition the college tier as <i>applied automation &amp; AI tooling</i> (no-code + light Python), and offer an optional deeper/self-paced "Advanced" track for those who want AI4I-level depth.</span></li>
+      <li><b>Assessed, stackable certification.</b> SG certs are assessment-gated and "industry-recognized." A certificate of attendance won't carry the "national standard" claim.
+        <span class="fix"><span>Fix →</span> keep the AI Ready Certified credential assessment-backed and verifiable (already designed in the standard doc) — make the assessment real.</span></li>
+      <li><b>A visible progression pathway.</b> SG is a ladder a learner climbs over years; AI Ready currently reads as 3 separate cohorts.
+        <span class="fix"><span>Fix →</span> show one pathway: Awareness → Literacy → Automation → Advanced, with the credential stacking at each step.</span></li>
+      <li><b>Educator resource pack.</b> SG hands schools reusable, educator-led classroom materials.
+        <span class="fix"><span>Fix →</span> bundle a teacher pack with the program — reinforces the trainer-network model and the "standard" story.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-idx">04 /</span><span class="sec-title">How to position it — and one thing to know</span></div>
+    <div class="pos">
+      <div class="q">"AI Ready is modeled on Singapore's national AI literacy ladder — AI4K → AI4S → AI4I — delivered as an intensive, in-person, project-based program built for Filipino classrooms, with stackable assessed certification and a certified-trainer network."</div>
+      <p style="margin-top:12px;color:var(--ink-3);font-size:13.5px;">That claim is <b style="color:var(--ink)">true and defensible</b> on structure. It positions you as the SG-equivalent IP provider for the AI track without overclaiming on depth.</p>
+    </div>
+    <div class="note red"><b>Know this before the NDA exchange:</b> AI Singapore <b>already runs AI4K Train-the-Trainer in the Philippines</b> (and Malaysia &amp; Thailand). That's both validation (the model works here) and a signal — an SG-origin program is already touching PH schools. Worth confirming whether Think Global's "Singapore partner" is in this orbit, because their syllabus may map directly to AI4K/AI4S.</div>
+  </section>
+
+  <section style="border-bottom:none;">
+    <div class="sec-head"><span class="sec-idx">05 /</span><span class="sec-title">Sources</span></div>
+    <div class="src">
+      AI Singapore — AI Talent Development: <a href="https://learn.aisingapore.org/">learn.aisingapore.org</a> ·
+      Student Outreach Programme (AI4S): <a href="https://learn.aisingapore.org/student-outreach-programme/">learn.aisingapore.org/student-outreach-programme</a> ·
+      AI for Everyone (AI4E): <a href="https://ai4e.aisingapore.org/">ai4e.aisingapore.org</a> ·
+      AI for Industry (AI4I) course detail (NUS SCALE): <a href="https://inetapps.nus.edu.sg/SACS/LifeLongLearning/CourseDetails/AISG-AI4I-F_TGS-2023019004/">nus.edu.sg</a> ·
+      AI Singapore: <a href="https://aisingapore.org/">aisingapore.org</a>
+      <br><br>Figures (hours, exercises, levels) per AI Singapore public pages, June 2026. Verify exact module lists against the live LearnAI catalogue before quoting in writing.
+    </div>
+  </section>
+
+  <footer><div class="foot"><div><span style="color:var(--signal)">●</span> AI Ready vs Singapore — Benchmark · Internal</div><div>Confidential · for Fleire</div></div></footer>
+</div>
+</body>
+</html>
