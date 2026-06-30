@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Certified Trainer Engine + Unit Economics — Internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0A0A0A;--paper-2:#141414;--paper-3:#1A1A1A;--ink:#F5F5F4;--ink-2:#D1D5DB;--ink-3:#9CA3AF;--ink-4:#6B7280;--rule:#2A2A2A;--rule-2:#3A3A3A;--signal:#8CC63F;--warn:#E0B341;--danger:#E07A41;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.6;background-image:repeating-linear-gradient(0deg,rgba(140,198,63,.012) 0 1px,transparent 1px 3px);}
+  p,li{color:var(--ink-2);}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
+  .mono{font-family:'Space Mono',monospace;}.serif{font-family:'Instrument Serif',serif;}.signal{color:var(--signal);}
+  .chrome{display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);padding:14px 0;border-bottom:1px solid var(--rule);}
+  .chrome .wm{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink-2);}
+  .chrome .wm .s{color:var(--signal);}
+  .chrome a{color:var(--ink-4);text-decoration:none;}
+  .hero{padding:38px 0 28px;border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:14px;}
+  h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.02;letter-spacing:-.015em;}
+  h1 em{font-style:italic;color:var(--signal);}
+  .lede{font-size:16px;color:var(--ink-3);max-width:66ch;margin-top:14px;}
+  section{padding:38px 0;border-bottom:1px solid var(--rule);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;}
+  .sec-idx{font-family:'Space Mono',monospace;font-size:12px;color:var(--signal);letter-spacing:.1em;}
+  .sec-title{font-family:'Instrument Serif',serif;font-size:28px;line-height:1;}
+  /* pipeline */
+  .pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--rule-2);}
+  .pstep{padding:18px 16px;border-right:1px solid var(--rule);position:relative;}
+  .pstep:last-child{border-right:none;background:var(--paper-2);}
+  .pstep .n{font-family:'Space Mono',monospace;font-size:10px;color:var(--signal);letter-spacing:.1em;}
+  .pstep h4{font-family:'Instrument Serif',serif;font-weight:400;font-size:18px;margin:6px 0 6px;}
+  .pstep p{font-size:12px;color:var(--ink-3);}
+  /* generic cards */
+  .cards{display:grid;gap:14px;}.c3{grid-template-columns:repeat(3,1fr);}.c2{grid-template-columns:1fr 1fr;}
+  .card{border:1px solid var(--rule-2);border-top:3px solid var(--signal);background:var(--paper-2);padding:20px;}
+  .card .k{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px;}
+  .card h4{font-family:'Instrument Serif',serif;font-weight:400;font-size:20px;margin-bottom:6px;}
+  .card .big{font-family:'Instrument Serif',serif;font-size:1.9rem;color:var(--signal);line-height:1;}
+  .card p,.card li{font-size:13px;color:var(--ink-3);}
+  .card ul{list-style:none;padding:0;margin-top:6px;}.card li{padding:3px 0 3px 14px;position:relative;}
+  .card li:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;background:var(--signal);}
+  /* table */
+  table.econ{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px;}
+  table.econ th{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-4);text-align:right;padding:9px 10px;border-bottom:1px solid var(--rule-2);}
+  table.econ th:first-child{text-align:left;}
+  table.econ td{padding:10px;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink-2);}
+  table.econ td:first-child{text-align:left;color:var(--ink);}
+  table.econ td .sub{display:block;font-size:11px;color:var(--ink-4);}
+  table.econ td.net{font-family:'Space Mono',monospace;color:var(--signal);font-weight:700;}
+  table.econ tr.weak td.net{color:var(--warn);}
+  table.econ tr.weak td:first-child{color:var(--warn);}
+  /* sensitivity bars */
+  .bars{margin-top:6px;}
+  .bar{display:flex;align-items:center;gap:12px;padding:7px 0;}
+  .bar .lab{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-3);width:80px;}
+  .bar .track{flex:1;background:var(--paper-3);height:26px;border:1px solid var(--rule);}
+  .bar .fill{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;background:linear-gradient(90deg,#5f7f2a,var(--signal));}
+  .bar .fill.w{background:linear-gradient(90deg,#7a6320,var(--warn));}
+  .bar .fill span{font-family:'Space Mono',monospace;font-size:10.5px;color:#0A0A0A;font-weight:700;}
+  .callout{border:1px solid var(--rule-2);border-left:3px solid var(--warn);background:var(--paper-2);padding:16px 20px;margin-top:16px;font-size:14px;color:var(--ink-2);}
+  .callout.g{border-left-color:var(--signal);}
+  .callout b{color:var(--ink);}.callout .lead{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink);display:block;margin-bottom:6px;}
+  ul.clean{list-style:none;padding:0;max-width:82ch;}
+  ul.clean li{position:relative;padding:8px 0 8px 22px;border-bottom:1px solid var(--rule);font-size:14px;}
+  ul.clean li:before{content:"";position:absolute;left:0;top:15px;width:6px;height:6px;background:var(--signal);}
+  ul.clean li b{color:var(--ink);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .big-num{font-family:'Instrument Serif',serif;font-size:clamp(2.6rem,7vw,4.5rem);color:var(--signal);line-height:1;}
+  .big-cap{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin-top:8px;}
+  footer{padding:26px 0 60px;}
+  .foot{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);}
+  @media(max-width:820px){.pipe,.c3,.c2,.grid2{grid-template-columns:1fr;}.pstep{border-right:none;border-bottom:1px solid var(--rule);}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="chrome"><div class="wm">Third Team <span class="s">/</span> Ventures</div><div><a href="./">← deal dashboard</a> · trainer engine · internal</div></div>
+
+  <div class="hero">
+    <div class="eyebrow">● Certified trainer engine + unit economics</div>
+    <h1>Who delivers it —<br>and does it still <em>pay?</em></h1>
+    <p class="lede">How we source and certify the trainers who deliver AI Ready at scale, and what each training day actually earns you <b>after</b> you pay them. Internal — for your decision only.</p>
+  </div>
+
+  <!-- WHY -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">01 /</span><span class="sec-title">Why certify, not deliver</span></div>
+    <div class="cards c3">
+      <div class="card"><div class="k">The leverage</div><h4>Your time ≠ the bottleneck</h4><p>2,400 students = ~80 batches a year. You can't (and shouldn't) be on stage for that. Certified trainers deliver; you own the standard.</p></div>
+      <div class="card"><div class="k">The moat</div><h4>You own the certification</h4><p>Only TTV-certified trainers may deliver. That protects quality, the brand, and your IP — and it's licensable to other partners later.</p></div>
+      <div class="card"><div class="k">The earn</div><h4>Margin on every batch</h4><p>You keep the spread between your per-student license and the trainer's pay — recurring, on batches you don't personally run.</p></div>
+    </div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">02 /</span><span class="sec-title">How we get the trainers</span></div>
+    <div class="pipe">
+      <div class="pstep"><div class="n">01 · SOURCE</div><h4>Find</h4><p>Education &amp; CS/IT grads, junior trainers, teachers upskilling, your DashoContent bench, referrals.</p></div>
+      <div class="pstep"><div class="n">02 · VET</div><h4>Screen</h4><p>Application + short demo: communication, teaching aptitude, baseline AI comfort. Reject the bottom.</p></div>
+      <div class="pstep"><div class="n">03 · CERTIFY</div><h4>Train-the-trainer</h4><p>3–5 day bootcamp on the curriculum, delivery method, responsible-AI, assessment. Must pass a graded mock.</p></div>
+      <div class="pstep"><div class="n">04 · DEPLOY</div><h4>Assign</h4><p>Matched to batches by level &amp; tier; paid per training day. Lead trainers can mentor new ones.</p></div>
+      <div class="pstep"><div class="n">05 · QA</div><h4>Hold the bar</h4><p>Observation rubric + student feedback each batch; annual re-certification; suspend anyone below standard.</p></div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">03 /</span><span class="sec-title">Tiers, pay &amp; the bootcamp</span></div>
+    <div class="grid2">
+      <div>
+        <table class="econ">
+          <thead><tr><th>Trainer tier</th><th>Role</th><th>Day rate</th></tr></thead>
+          <tbody>
+            <tr><td>Lead Trainer</td><td>Senior · trains others · college</td><td>₱10,000</td></tr>
+            <tr><td>Certified Facilitator</td><td>Runs a batch solo</td><td>₱8,000</td></tr>
+            <tr><td>Associate</td><td>Assists large batches</td><td>₱4,000</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12.5px;color:var(--ink-4);margin-top:10px;" class="mono">Certification fee ₱25,000 / trainer · re-cert ₱10,000 / yr (quality + a small revenue line; ~8–10 certified covers 2,400 students/yr).</p>
+      </div>
+      <div>
+        <p style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:8px;">The certification bootcamp</p>
+        <ul class="clean">
+          <li>The AI Ready curriculum, end to end</li>
+          <li>Delivery method &amp; classroom management</li>
+          <li>The responsible-AI framework &amp; guardrails</li>
+          <li>Assessment, rubrics &amp; the certificate flow</li>
+          <li>Graded mock delivery → pass to certify</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIT ECONOMICS -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">04 /</span><span class="sec-title">Unit economics — you pay the trainer</span></div>
+    <p style="margin-bottom:12px;max-width:66ch;">Per 3-day batch. Revenue is your per-student license; you pay the trainer and materials out of it; the rest is your net (with ~0 of your own time).</p>
+    <table class="econ">
+      <thead><tr><th>Batch</th><th>Revenue</th><th>Trainer (3d)</th><th>Materials</th><th>Your net</th><th>/ day</th><th>Margin</th></tr></thead>
+      <tbody>
+        <tr class="weak"><td>Elementary · ₱1,200 · 35 pax<span class="sub">awareness · 1 facilitator</span></td><td>₱42,000</td><td>₱24,000</td><td>₱5,250</td><td class="net">₱12,750</td><td>₱4,250</td><td>30%</td></tr>
+        <tr class="weak"><td>JHS/SHS · ₱1,800 · 20 pax<span class="sub">at the minimum</span></td><td>₱36,000</td><td>₱24,000</td><td>₱3,000</td><td class="net">₱9,000</td><td>₱3,000</td><td>25%</td></tr>
+        <tr><td>JHS/SHS · ₱1,800 · 25 pax</td><td>₱45,000</td><td>₱24,000</td><td>₱3,750</td><td class="net">₱17,250</td><td>₱5,750</td><td>38%</td></tr>
+        <tr><td>JHS/SHS · ₱1,800 · 30 pax<span class="sub">the sweet spot</span></td><td>₱54,000</td><td>₱24,000</td><td>₱4,500</td><td class="net">₱25,500</td><td>₱8,500</td><td>47%</td></tr>
+        <tr><td>College · ₱2,200 · 25 pax<span class="sub">1 lead trainer</span></td><td>₱55,000</td><td>₱30,000</td><td>₱3,750</td><td class="net">₱21,250</td><td>₱7,083</td><td>39%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--ink-4);margin-top:8px;" class="mono">Trainer: facilitator ₱8k/day, lead ₱10k/day · materials+certificate ₱150/student · illustrative.</p>
+  </section>
+
+  <!-- BATCH SIZE -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">05 /</span><span class="sec-title">Batch size makes or breaks it</span></div>
+    <p style="margin-bottom:8px;max-width:64ch;">Same JHS/SHS program, one trainer — net per day swings hard with how many students are in the room:</p>
+    <div class="bars">
+      <div class="bar"><div class="lab">20 pax</div><div class="track"><div class="fill w" style="width:35%"><span>₱3,000/day · 25%</span></div></div></div>
+      <div class="bar"><div class="lab">25 pax</div><div class="track"><div class="fill" style="width:68%"><span>₱5,750/day · 38%</span></div></div></div>
+      <div class="bar"><div class="lab">30 pax</div><div class="track"><div class="fill" style="width:100%"><span>₱8,500/day · 47%</span></div></div></div>
+    </div>
+    <div class="callout"><span class="lead">Two rules that protect the margin.</span> <b>1) Hold batches at 25–30+, never 20.</b> A 20-pax batch barely clears the trainer's pay. <b>2) Elementary is the weak spot</b> — at ₱1,200 it nets only ~₱364/student even at 35 pax. Fix it: price elementary at <b>₱1,500</b>, run larger awareness batches (1:35–40), or staff it with an Associate, not a full Facilitator.</div>
+  </section>
+
+  <!-- MODEL A vs B -->
+  <section>
+    <div class="sec-head"><span class="sec-idx">06 /</span><span class="sec-title">Two ways to structure it</span></div>
+    <div class="grid2">
+      <div class="card"><div class="k">Model A · You pay trainers</div><h4>Higher headline, you carry ops</h4><div class="big">~₱1.6M / yr</div><p style="margin-top:6px;">net at 2,400 students (blended ~₱676/student). You hire, pay, and manage trainers — and absorb batch-size risk. Bigger number, more work and exposure.</p></div>
+      <div class="card warn" style="border-top-color:var(--warn)"><div class="k" style="color:var(--warn)">Model B · TG pays trainers</div><h4>Clean royalty, ~zero ops</h4><div class="big" style="color:var(--warn)">~₱1.4M / yr</div><p style="margin-top:6px;">you take a flat <b>₱600/student</b> IP+certification royalty; Think Global employs and pays the certified trainers. ~95% margin, no payroll, no batch-size risk. You still own the cert standard.</p></div>
+    </div>
+    <div class="callout g"><b>Recommendation:</b> push for <b>Model B</b>. The net is nearly the same, but you shed trainer payroll, scheduling, and the batch-size risk entirely — and keep control through certification. Use Model A only where you want to run premium cohorts yourself. Either way, certification fees + the ₱450k setup sit on top.</div>
+  </section>
+
+  <!-- VERDICT -->
+  <section style="border-bottom:none;">
+    <div class="sec-head"><span class="sec-idx">07 /</span><span class="sec-title">Is it worth it?</span></div>
+    <div class="grid2" style="align-items:center;">
+      <div>
+        <ul class="clean">
+          <li><b>Yes — as a recurring annuity</b> on work you don't personally deliver.</li>
+          <li>~<b>₱1.4–1.6M/yr</b> net at 2,400 students, + certification fees + ₱450k setup.</li>
+          <li>Margin is <b>real but moderate</b> — the trainer eats 45–55%. It lives or dies on batch size and elementary pricing.</li>
+          <li>The compounding win: you own the <b>IP + the certification standard</b> — licensable to other partners beyond Think Global.</li>
+        </ul>
+      </div>
+      <div style="text-align:center;border:1px solid var(--rule-2);background:var(--paper-2);padding:28px 20px;">
+        <div class="big-num">~₱1.5M</div>
+        <div class="big-cap">/ yr recurring net · ~0 of your delivery time</div>
+        <div style="font-size:12.5px;color:var(--ink-4);margin-top:14px;">Worth it — if you hold batches ≥25 and fix elementary. Model B makes it cleaner.</div>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:12px;color:var(--ink-4)" class="mono">Illustrative: facilitator ₱8k/day, lead ₱10k/day, materials ₱150/student, blend 30% elem / 50% JHS-SHS / 20% college. Adjust any input and the model moves.</p>
+  </section>
+
+  <footer><div class="foot"><div><span class="signal">●</span> Third Team Ventures · Trainer Engine — Internal</div><div>Confidential — for Fleire only</div></div></footer>
+</div>
+</body>
+</html>
